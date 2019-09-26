@@ -21,13 +21,9 @@ namespace ShellNew
         void AddKeys()
         {
             foreach (string name in Registry.ClassesRoot.GetSubKeyNames())
-            {
-                if (!name.StartsWith("."))
-                    continue;
-
-                using (RegistryKey subKey = Registry.ClassesRoot.OpenSubKey(name))
-                    AddKeysRecursive(subKey);
-            }
+                if (name.StartsWith("."))
+                    using (RegistryKey subKey = Registry.ClassesRoot.OpenSubKey(name))
+                        AddKeysRecursive(subKey);
         }
 
         void AddKeysRecursive(RegistryKey key)
